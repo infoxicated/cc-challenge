@@ -56,7 +56,7 @@
 					</ul>
 				</div><div role="complimentary">	
 					<h2>My Basket</h2>
-						<table id="basketItems" class="visually_hidden nicetable">
+						<table id="basketItems" class="hidden nicetable">
 							<thead>
 								<tr>
 									<th scope="col">Item</th><th scope="col">Qty</th><th scope="col">Price</th>
@@ -75,7 +75,7 @@
 								<td data-hook="total_price" class="text_right price"></td>
 							</tfoot>
 						</table>
-						<button data-hook="empty_basket" class="visually_hidden">Empty Basket</button>
+						<button data-hook="empty_basket" class="hidden">Empty Basket</button>
 						<p class="notice" data-hook="basket_notice">No items in basket</p>
 						
 				</div>

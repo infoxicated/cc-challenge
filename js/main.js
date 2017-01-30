@@ -170,9 +170,9 @@ function updateBasketDisplay(){
 		});
 		
 		document.querySelector('#basketItems tbody').innerHTML = itemRows.join('');		
-		document.querySelector('[data-hook="basket_notice"]').classList.add('visually_hidden');
-		document.querySelector('#basketItems').classList.remove('visually_hidden');
-		document.querySelector('[data-hook="empty_basket"]').classList.remove('visually_hidden');
+		document.querySelector('[data-hook="basket_notice"]').classList.add('hidden');
+		document.querySelector('#basketItems').classList.remove('hidden');
+		document.querySelector('[data-hook="empty_basket"]').classList.remove('hidden');
 		
 		const totalPriceContainer = document.querySelector('[data-hook="total_price"]');
 		totalPriceContainer.innerHTML = BasketManager.getTotalPrice();
@@ -189,9 +189,9 @@ function updateBasketDisplay(){
 			.forEach(function(node){
 				node.parentNode.removeChild(node);
 			});
-		document.querySelector('[data-hook="basket_notice"]').classList.remove('visually_hidden');
-		document.querySelector('#basketItems').classList.add('visually_hidden');
-		document.querySelector('[data-hook="empty_basket"]').classList.add('visually_hidden');
+		document.querySelector('[data-hook="basket_notice"]').classList.remove('hidden');
+		document.querySelector('#basketItems').classList.add('hidden');
+		document.querySelector('[data-hook="empty_basket"]').classList.add('hidden');
 	}
 	
 }
