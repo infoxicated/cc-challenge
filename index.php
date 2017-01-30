@@ -75,6 +75,7 @@
 								<td data-hook="total_price" class="text_right price"></td>
 							</tfoot>
 						</table>
+						<button data-hook="empty_basket" class="visually_hidden">Empty Basket</button>
 						<p class="notice" data-hook="basket_notice">No items in basket</p>
 						
 				</div>

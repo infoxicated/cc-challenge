@@ -110,6 +110,10 @@ const BasketManager = new function(){
 	this.setData = function(data){
 		this.items = JSON.parse(data);
 	}
+	
+	this.emptyBasket = function(){
+		this.items.length = 0;
+	}
 
 }
 function toggleNav(){
@@ -132,6 +136,14 @@ function removeItemFromBasket(){
 	setCookie('shopping_basket_contents', BasketManager.getData(), 1);	
 	updateBasketDisplay();
 }
+
+
+function emptyBasket(){
+	BasketManager.emptyBasket();
+	setCookie('shopping_basket_contents', BasketManager.getData(), 1);	
+	updateBasketDisplay();
+}
+
 
 function updateBasketDisplay(){
 	
@@ -160,6 +172,7 @@ function updateBasketDisplay(){
 		document.querySelector('#basketItems tbody').innerHTML = itemRows.join('');		
 		document.querySelector('[data-hook="basket_notice"]').classList.add('visually_hidden');
 		document.querySelector('#basketItems').classList.remove('visually_hidden');
+		document.querySelector('[data-hook="empty_basket"]').classList.remove('visually_hidden');
 		
 		const totalPriceContainer = document.querySelector('[data-hook="total_price"]');
 		totalPriceContainer.innerHTML = BasketManager.getTotalPrice();
@@ -178,6 +191,7 @@ function updateBasketDisplay(){
 			});
 		document.querySelector('[data-hook="basket_notice"]').classList.remove('visually_hidden');
 		document.querySelector('#basketItems').classList.add('visually_hidden');
+		document.querySelector('[data-hook="empty_basket"]').classList.add('visually_hidden');
 	}
 	
 }
@@ -187,6 +201,7 @@ navToggler.addEventListener('mousedown', toggleNav);
 
 const addToBasketCTAs = document.querySelectorAll('[data-hook="add_to_basket"]');
 const removeFromBasketCTAs = document.querySelectorAll('[data-hook="remove_from_basket"]');
+const emptyBasketCTA = document.querySelector('[data-hook="empty_basket"]');
 
 if(addToBasketCTAs){
 	addToBasketCTAs.forEach(cta => cta.addEventListener('mousedown', addItemToBasket));
@@ -195,6 +210,10 @@ if(addToBasketCTAs){
 
 if(removeFromBasketCTAs){
 	removeFromBasketCTAs.forEach(cta => cta.addEventListener('mousedown', removeItemFromBasket));
+}
+
+if(emptyBasketCTA){
+	emptyBasketCTA.addEventListener('mousedown', emptyBasket);
 }
 
 if(getCookie('shopping_basket_contents')){

@@ -245,6 +245,10 @@ th.text_right, td.text_right, .text_right {
 	animation: bgfade 2s;
 }
 
+#basketItems+button {
+	margin-top: 1rem;
+}
+
 p+form {
 	margin-top: 1rem;
 }
@@ -404,7 +408,7 @@ ul {
 
 main {
 	li+li {
-		margin-top: .2rem;
+		margin: 1rem 0 1.5rem;
 	}
 
 	img {
