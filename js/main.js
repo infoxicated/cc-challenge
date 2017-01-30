@@ -41,11 +41,12 @@ const BasketManager = new function(){
 	this.addItem = function(item){
 		
 		const existingItem = this.getItemByProductId(item.product_id);
-		
+		// If the item is already added, just increment the quantity
 		if(existingItem){
 			
 			existingItem.quantity++;
 		}
+		// if not then add it in.
 		else {
 			item.quantity = 1;
 			this.items.push(item);
@@ -56,6 +57,7 @@ const BasketManager = new function(){
 		
 	this.getItemByProductId = function(product_id){
 		var item = false;	
+		// iterate through the array to find it
 		if (!Array.prototype.find) {
 			for(x=0, max = this.items.length; x < max; x++){
 				if(this.items[x].product_id == product_id){
@@ -63,8 +65,8 @@ const BasketManager = new function(){
 				}
 			}
 		}
-		else {
-			
+		// or use .find in newer browsers
+		else {			
 			item = this.items.find(item => item.product_id === product_id);
 		}		
 		return item;
@@ -148,17 +150,20 @@ function emptyBasket(){
 function updateBasketDisplay(){
 	
 	const items = BasketManager.getItems();
-	
+	// if there are items to display
 	if(items.length){
 		
+		// template table row for new basket items
 		const basketRowTemplate = document.querySelector('#basketItems thead > .template');
 		const itemRows = [];
 		
+		// remove the items currently shown
 		document.querySelectorAll('#basketItems tbody .item')
 			.forEach(function(node){
 				node.parentNode.removeChild(node);
 			});
 		
+		// create a new table row for each item
 		items.forEach(function(item){
 			newRow = basketRowTemplate.cloneNode(true);
 			newRow.classList.remove('template');
@@ -168,8 +173,10 @@ function updateBasketDisplay(){
 			newRow.querySelector('[data-hook="price"]').innerHTML = item.price;
 			itemRows.push(newRow.outerHTML);
 		});
+		// insert the rows into the basket display table
+		document.querySelector('#basketItems tbody').innerHTML = itemRows.join('');
 		
-		document.querySelector('#basketItems tbody').innerHTML = itemRows.join('');		
+		// show and hide GUI elements
 		document.querySelector('[data-hook="basket_notice"]').classList.add('hidden');
 		document.querySelector('#basketItems').classList.remove('hidden');
 		document.querySelector('[data-hook="empty_basket"]').classList.remove('hidden');
@@ -184,11 +191,16 @@ function updateBasketDisplay(){
 			totalPriceContainer.style.webkitAnimation = ''	
 		}, 10);
 	}
+	// if there aren't then reset the basket
 	else {
+		
+		// remove the items currently shown
 		document.querySelectorAll('#basketItems tbody .item')
 			.forEach(function(node){
 				node.parentNode.removeChild(node);
 			});
+			
+		// show and hide GUI elements
 		document.querySelector('[data-hook="basket_notice"]').classList.remove('hidden');
 		document.querySelector('#basketItems').classList.add('hidden');
 		document.querySelector('[data-hook="empty_basket"]').classList.add('hidden');
